@@ -35,7 +35,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::paginate(10);
+        $posts = Post::orderBy('id', 'desc')->paginate(20);
         return view('admin.posts.index', compact('posts'));
     }
 
@@ -165,8 +165,8 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        $post->tags()->sync([]);
-        Storage::disk('public')->delete($post->image);
+//        $post->tags()->sync([]);
+//        Storage::disk('public')->delete($post->image);
         $post->delete();
 
         return redirect()->route('post.index');

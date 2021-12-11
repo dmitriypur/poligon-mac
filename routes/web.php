@@ -34,6 +34,10 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => 'admi
     Route::resource('post', 'PostController');
     Route::resource('user', 'UserController');
 
+    Route::get('trash', 'TrashedPostController@index')->name('trash');
+    Route::get('restore/{id}', 'TrashedPostController@restore')->name('restore.post');
+    Route::delete('trash/{id}', 'TrashedPostController@delete')->name('delete.trash.post');
+
     Route::get('/bookmark', 'BookmarkController@index')->name('bookmark');
     Route::delete('/bookmark/{id}', 'BookmarkController@delete')->name('bookmark.delete');
 });

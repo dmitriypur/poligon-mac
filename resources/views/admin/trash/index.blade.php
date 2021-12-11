@@ -3,8 +3,6 @@
 @section('content')
     <div class="container">
         <h1 class="my-5">Записи</h1>
-        <a href="{{ route('post.create') }}" class="btn btn-primary mb-3">Создать запись</a>
-        <a href="{{ route('trash') }}" class="btn btn-danger mb-3">Корзина</a>
         <div class="card">
             <div class="card-body">
                 <table class="table table-bordered">
@@ -12,27 +10,19 @@
                     <tr>
                         <th style="width: 10px">ID</th>
                         <th>Название</th>
-                        <th>Опубликовано</th>
-                        <th>Вывод на главной</th>
-                        <th>Изображение</th>
                         <th style="width: 100px">Действие</th>
                     </tr>
                     </thead>
                     <tbody>
-                    @forelse($posts as $post)
+                    @forelse($trash_posts as $post)
                         <tr>
                             <td>{{ $post->id }}</td>
                             <td>{{ $post->title ?? '' }}</td>
-                            <td class="{{ $post->publish ? 'text-success' : 'text-danger' }}">{{ $post->publish ? 'Да' : 'Нет' }}</td>
-                            <td class="{{ $post->favorite ? 'text-success' : 'text-danger' }}">{{ $post->favorite ? 'Да' : 'Нет' }}</td>
                             <td>
-                                <img src="{{ $post->getImage() }}" style="width: 80px;" alt="{{ $post->title ?? '' }}">
-                            </td>
-                            <td>
-                                <a href="{{ route('post.edit', $post->id) }}" class="btn btn-primary btn-sm">
-                                    <i class="far fa-edit"></i>
+                                <a href="{{ route('restore.post', $post->id) }}" class="btn btn-primary btn-sm">
+                                    <i class="fas fa-undo"></i>
                                 </a>
-                                <form action="{{ route('post.destroy', $post->id) }}" method="post" class="d-inline">
+                                <form action="{{ route('delete.trash.post', $post->id) }}" method="post" class="d-inline">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-danger btn-sm"><i class="far fa-trash-alt"></i></button>
@@ -42,7 +32,7 @@
                     @empty
                         <tr>
                             <th colspan="2">
-                                <h1>Записи отсутствуют</h1>
+                                <h3>Корзина пуста</h3>
                             </th>
                         </tr>
                     @endforelse
@@ -51,7 +41,7 @@
             </div>
             <!-- /.card-body -->
             <div class="card-footer clearfix">
-                {{ $posts->links('vendor.pagination.bootstrap-4') }}
+{{--                {{ $trash_posts->links('vendor.pagination.bootstrap-4') }}--}}
             </div>
         </div>
     </div>
