@@ -111,7 +111,7 @@ class UserController extends Controller
         ];
 
         $data = Validator::make($request->all(), $rules, $messages)->validate();
-        $data['photo'] = User::uploadImage($request, $user->photo);
+        $data['photo'] = User::uploadAvatar($request, $user->photo);
 
         $user->update($data);
 

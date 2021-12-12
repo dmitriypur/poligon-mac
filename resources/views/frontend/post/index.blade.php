@@ -7,7 +7,6 @@
         </ul>
         <div class="col-md-9">
             @include('parts.posts-list')
-            {{ $posts->links('vendor.pagination.bootstrap-4') }}
         </div>
     </div>
 @endsection

@@ -2,9 +2,11 @@
 @section('content')
     <div class="container">
         <h1 class="my-5">Понравившиеся записи</h1>
+
         <div class="card">
+            <!-- /.card-header -->
             <div class="card-body">
-                <table class="table table-bordered">
+                <table id="example1" class="table table-bordered table-striped">
                     <thead>
                     <tr>
                         <th style="width: 10px">ID</th>
@@ -37,12 +39,16 @@
                         </tr>
                     @endforelse
                     </tbody>
+                    <tfoot>
+                    <tr>
+                        <th style="width: 10px">ID</th>
+                        <th>Название</th>
+                        <th style="width: 100px">Удалить</th>
+                    </tr>
+                    </tfoot>
                 </table>
             </div>
             <!-- /.card-body -->
-            <div class="card-footer clearfix">
-                {{ $posts->links('vendor.pagination.bootstrap-4') }}
-            </div>
         </div>
     </div>
 @endsection

@@ -52,8 +52,7 @@ class CategoryController extends Controller
             'image.image' => 'Только изображения'
         ];
         $data = Validator::make($request->all(), $rules, $messages)->validate();
-        $data['image'] = Category::uploadImage($request);
-
+        $data['image'] = uploadImage($request);
         Category::create($data);
 
         return redirect()->route('category.index')->with('success', 'Категория добавлена');
@@ -96,7 +95,7 @@ class CategoryController extends Controller
 
         $data = Validator::make($request->all(), $rules, $messages)->validate();
 
-        $data['image'] = Category::uploadImage($request, $category->image);
+        $data['image'] = uploadImage($request, $category->image);
 
         $category->update($data);
 

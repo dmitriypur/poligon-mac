@@ -5,7 +5,7 @@
         <h1 class="my-5">Записи</h1>
         <div class="card">
             <div class="card-body">
-                <table class="table table-bordered">
+                <table id="example1" class="table table-bordered table-striped">
                     <thead>
                     <tr>
                         <th style="width: 10px">ID</th>

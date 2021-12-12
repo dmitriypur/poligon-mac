@@ -26,6 +26,10 @@ class Category extends Model
         return $this->hasMany(Post::class);
     }
 
+    public function reklamas(){
+        return $this->hasMany(Reklama::class);
+    }
+
     public function sluggable(): array
     {
         return [
@@ -33,17 +37,6 @@ class Category extends Model
                 'source' => 'title'
             ]
         ];
-    }
-
-    public static function uploadImage(Request $request, $image = null){
-        if($request->hasFile('image')){
-            if($image){
-                Storage::disk('public')->delete($image);
-            }
-            $folder = date('Y-m-d');
-            return Storage::disk('public')->put("/images/{$folder}", $request['image']);
-        }
-        return $image;
     }
 
     public function getImage(){

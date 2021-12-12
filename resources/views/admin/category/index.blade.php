@@ -6,7 +6,7 @@
         <div class="card">
             <!-- /.card-header -->
             <div class="card-body">
-                <table class="table table-bordered">
+                <table id="example1" class="table table-bordered table-striped">
                     <thead>
                     <tr>
                         <th style="width: 10px">ID</th>
@@ -44,10 +44,7 @@
                     </tbody>
                 </table>
             </div>
-            <!-- /.card-body -->
-            <div class="card-footer clearfix">
-                {{ $categories->links('vendor.pagination.bootstrap-4') }}
-            </div>
         </div>
+
     </div>
 @endsection

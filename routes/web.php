@@ -33,6 +33,7 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => 'admi
     Route::resource('tag', 'TagController');
     Route::resource('post', 'PostController');
     Route::resource('user', 'UserController');
+    Route::resource('reklama', 'ReklamaController');
 
     Route::get('trash', 'TrashedPostController@index')->name('trash');
     Route::get('restore/{id}', 'TrashedPostController@restore')->name('restore.post');

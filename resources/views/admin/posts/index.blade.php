@@ -5,9 +5,11 @@
         <h1 class="my-5">Записи</h1>
         <a href="{{ route('post.create') }}" class="btn btn-primary mb-3">Создать запись</a>
         <a href="{{ route('trash') }}" class="btn btn-danger mb-3">Корзина</a>
+
         <div class="card">
+            <!-- /.card-header -->
             <div class="card-body">
-                <table class="table table-bordered">
+                <table id="example1" class="table table-bordered table-striped">
                     <thead>
                     <tr>
                         <th style="width: 10px">ID</th>
@@ -47,12 +49,19 @@
                         </tr>
                     @endforelse
                     </tbody>
+                    <tfoot>
+                    <tr>
+                        <th style="width: 10px">ID</th>
+                        <th>Название</th>
+                        <th>Опубликовано</th>
+                        <th>Вывод на главной</th>
+                        <th>Изображение</th>
+                        <th style="width: 100px">Действие</th>
+                    </tr>
+                    </tfoot>
                 </table>
             </div>
             <!-- /.card-body -->
-            <div class="card-footer clearfix">
-                {{ $posts->links('vendor.pagination.bootstrap-4') }}
-            </div>
         </div>
     </div>
 @endsection

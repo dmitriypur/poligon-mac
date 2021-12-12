@@ -1,10 +1,11 @@
 <h2>{{ $title }}</h2>
 
 @isset($category)
-<div class="cat-desc mb-5">
-    <img class="w-25 h-25 float-start d-block me-3 mb-3" src="{{ $category->getImage() ?? '' }}" alt="{{ $category->title ?? '' }}">
-    <p class="card-text">{{ $category->description ?? '' }}</p>
-</div>
+    <div class="cat-desc mb-5">
+        <img class="w-25 h-25 float-start d-block me-3 mb-3" src="{{ $category->getImage() ?? '' }}"
+             alt="{{ $category->title ?? '' }}">
+        <p class="card-text">{{ $category->description ?? '' }}</p>
+    </div>
 @endisset
 
 <nav aria-label="breadcrumb">
@@ -13,18 +14,53 @@
         <li class="breadcrumb-item active" aria-current="page">{{ $title }}</li>
     </ol>
 </nav>
-@foreach($posts as $post)
-    <div class="card mb-5">
-        <img
-            src="{{ $post->getImage() }}"
-            class="card-img-top" alt="{{ $post->title }}">
-        <div class="card-body">
-            {{--                                <a href="#"><span class="badge bg-primary">{{ $post->category->title ?? '' }}</span></a>--}}
-            <span class="post-date">{{ $post->dateAsCarbon }}</span>
-            <h5 class="card-title">{{ $post->title }}</h5>
-            @include('parts.likes')
-            <a href="{{ route('show.post', $post->slug) }}" class="btn btn-primary">Далее</a>
-            <p><i class="far fa-eye"></i> <span class="badge bg-primary">{{ $post->view_count }}</span></p>
-        </div>
-    </div>
-@endforeach
+
+<div id="post-data">
+    @include('parts.data')
+</div>
+
+
+<div class="ajax-load text-center" style="display: none;">
+    <p><img src="{{ asset('preload.gif') }}" alt="preload"></p>
+</div>
+
+@section('scripts')
+    <script>
+        let lastPage = {{ $posts->lastPage() }}
+        function loadMoredata(page) {
+            $.ajax({
+                url: '?page=' + page,
+                type: 'get',
+                beforeSend: function () {
+                    $('.ajax-load').show();
+                }
+            }).done(function (data) {
+                if(data.html == ''){
+                    $('.ajax-load').html('Записей больше нет!');
+                    return;
+                }
+                $('.ajax-load').hide();
+                $('#post-data').append(data.html);
+            }).fail(function (jqXHR, ajaxOptions, thrownError) {
+                alert('Сервер не отвечает...');
+            })
+        }
+        let page = 1;
+        $(window).scroll(function () {
+
+            if($(window).scrollTop() + $(window).height() >= $(document).height()){
+
+                if(page >= lastPage){
+                    return;
+                }else{
+                    page++;
+                    loadMoredata(page);
+                }
+                console.log(page)
+            }
+        })
+
+
+
+    </script>
+@endsection

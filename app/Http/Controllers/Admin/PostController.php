@@ -35,7 +35,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::orderBy('id', 'desc')->paginate(20);
+        $posts = Post::all();
         return view('admin.posts.index', compact('posts'));
     }
 
@@ -87,7 +87,7 @@ class PostController extends Controller
         }
         unset($data['tag_ids']);
 
-        $data['image'] = Post::uploadImage($request);
+        $data['image'] = uploadImage($request);
 
         $post = Post::firstOrCreate($data);
 
@@ -148,7 +148,7 @@ class PostController extends Controller
         }
         unset($data['tag_ids']);
 
-        $data['image'] = Post::uploadImage($request, $post->image);
+        $data['image'] = uploadImage($request, $post->image);
 
         $post->update($data);
 

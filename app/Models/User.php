@@ -63,7 +63,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public static function uploadImage(Request $request, $photo = null){
+    public static function uploadAvatar(Request $request, $photo = null){
         if($request->hasFile('photo')){
             if($photo){
                 Storage::disk('public')->delete($photo);

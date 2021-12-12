@@ -64,10 +64,17 @@
                 </li>
                 <li class="nav-item">
                     <a href="{{ route('bookmark') }}" class="nav-link">
-                        <i class="nav-icon fas fa-comments"></i>
+                        <i class="nav-icon fas fa-bookmark"></i>
                         <p>
                             Закладки
-{{--                            <span class="badge badge-info right">34</span>--}}
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('reklama.index') }}" class="nav-link">
+                        <i class="nav-icon fas fa-bullhorn"></i>
+                        <p>
+                            Реклама
                         </p>
                     </a>
                 </li>
