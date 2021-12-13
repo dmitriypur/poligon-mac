@@ -1,4 +1,27 @@
-<h3>Categories</h3>
+<div class="sidebar_menu-auth">
+    @guest()
+        <a href="#" class="modal__show link_auth" data-modal="#sign-in1"></a>
+    @endguest
+    <a href="{{ route('cabinet') }}" class=" t_green">
+        Личный кабинет
+    </a>
+    <a href="#" class="modal__show" data-modal="#sign-in2">
+        Подписки
+    </a>
+    <a href="#" class="modal__show" data-modal="#sign-in2">
+        Заметки
+    </a>
+    <a href="#" class="modal__show" data-modal="#sign-in2">
+        Лента
+    </a>
+    <a href="#" class="modal__show" data-modal="#sign-in2">
+        Рейтинг
+    </a>
+    <a href="#" class="modal__show t_green" data-modal="#sign-in2">
+        Написать статью
+    </a>
+</div>
+<h3>Категории</h3>
 <ul class="list-group mb-5">
     @foreach($categories as $category)
         <a href="{{ route('category.single', $category->slug) }}">
@@ -8,8 +31,7 @@
             </li>
         </a>
     @endforeach
-    <a href="{{ route('categories') }}">Все категории...</a>
-    <a href="3" class="modal__show" data-modal="#sign-in1">Вход</a>
+    <a href="{{ route('categories') }}" class="t_green">Все категории...</a>
 </ul>
 <h3>Tags</h3>
 @foreach($tags as $tag)

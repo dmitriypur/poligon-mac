@@ -62,4 +62,8 @@ class Post extends Model
     public function bookmarkUser(){
         return $this->belongsToMany(User::class, 'post_user_bookmarks');
     }
+
+    public function comments(){
+        return $this->hasMany(Comment::class, 'post_id', 'id');
+    }
 }

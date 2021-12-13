@@ -10,7 +10,7 @@
 
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('home') }}">Главная</a></li>
         <li class="breadcrumb-item active" aria-current="page">{{ $title }}</li>
     </ol>
 </nav>
@@ -26,41 +26,6 @@
 
 @section('scripts')
     <script>
-        let lastPage = {{ $posts->lastPage() }}
-        function loadMoredata(page) {
-            $.ajax({
-                url: '?page=' + page,
-                type: 'get',
-                beforeSend: function () {
-                    $('.ajax-load').show();
-                }
-            }).done(function (data) {
-                if(data.html == ''){
-                    $('.ajax-load').html('Записей больше нет!');
-                    return;
-                }
-                $('.ajax-load').hide();
-                $('#post-data').append(data.html);
-            }).fail(function (jqXHR, ajaxOptions, thrownError) {
-                alert('Сервер не отвечает...');
-            })
-        }
-        let page = 1;
-        $(window).scroll(function () {
-
-            if($(window).scrollTop() + $(window).height() >= $(document).height()){
-
-                if(page >= lastPage){
-                    return;
-                }else{
-                    page++;
-                    loadMoredata(page);
-                }
-                console.log(page)
-            }
-        })
-
-
-
+        let lastPage = {{ $posts->lastPage() }};
     </script>
 @endsection

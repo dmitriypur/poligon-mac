@@ -13,11 +13,17 @@ class CategoryController extends Controller
         return view('frontend.category.index', compact('categories', 'title'));
     }
 
-    public function show($slug)
+    public function show(Request $request, $slug)
     {
         $category = Category::where('slug', $slug)->firstOrFail();
-        $posts = $category->posts()->orderBy('id', 'DESC')->with('likes')->paginate(10);
+        $posts = $category->posts()->orderBy('id', 'DESC')->with('likes')->paginate(3);
         $title = "Новости категории '{$category->title}'";
-        return view('frontend.category.posts', compact('posts', 'title', 'category'));
+        $reklama = $category->reklamas()->get();
+
+        if($request->ajax()){
+            $view = view('parts.data', compact('posts', 'reklama'))->render();
+            return response()->json(['html' => $view]);
+        }
+        return view('frontend.category.posts', compact('posts', 'title', 'category', 'reklama'));
     }
 }

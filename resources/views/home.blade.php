@@ -83,6 +83,7 @@
 
 @endsection
 @section('scripts')
+    <script src="https://unpkg.com/simpleslider-js@1.9.0/dist/simpleSlider.min.js"></script>
     <script>
         new SimpleSlider('.simple-slider-first', {
             slidesPerView: {

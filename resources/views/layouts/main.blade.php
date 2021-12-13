@@ -75,14 +75,18 @@
         </div>
     </div>
 </div>
+<div class="modal__wrap hide" id="sign-in2">
+    <div class="modalka">
+        <div class="modal__close"><i class="far fa-times-circle"></i></div>
+        <p class="text-danger">В разработке</p>
+    </div>
+</div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
 <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/all.js"></script>
-<script src="https://unpkg.com/simpleslider-js@1.9.0/dist/simpleSlider.min.js"></script>
 @yield('scripts')
 <script src="{{ asset('front/js/front.js') }}"></script>
-
 </body>
 </html>

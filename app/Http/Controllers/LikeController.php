@@ -28,6 +28,6 @@ class LikeController extends Controller
             Like::create($data);
         }
 
-        return redirect()->route('home');
+        return redirect()->back();
     }
 }

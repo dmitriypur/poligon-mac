@@ -22,8 +22,7 @@ Route::get('/tag/{slug}', 'TagController@show')->name('tag.single');
 
 Route::post('/{id}/likes', 'LikeController@index')->name('post.like.store');
 Route::post('/{id}/bookmark', 'BookmarkController@index')->name('post.bookmark.store');
-
-
+Route::post('/{post}/comments', 'CommentController@store')->name('comment.store');
 
 
 Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => 'admin'], function(){
@@ -43,6 +42,10 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => 'admi
     Route::delete('/bookmark/{id}', 'BookmarkController@delete')->name('bookmark.delete');
 });
 
+Route::group(['namespace' => 'Cabinet', 'prefix' => 'cabinet', 'middleware' => 'cabinet'], function(){
+    Route::get('/', 'CabinetController@index')->name('cabinet');
+});
+
 Route::group(['middleware' => 'guest'], function(){
     Route::get('/register', 'UserController@create')->name('register.create');
     Route::post('/register', 'UserController@store')->name('register.store');
@@ -56,6 +59,5 @@ Route::group(['middleware' => 'guest'], function(){
     Route::get('/reset-password/{token}', 'UserController@resetPassword')->name('password.reset');
     Route::post('/reset-password', 'UserController@updatePassword')->name('password.update');
 });
-
 
 Route::get('/logout', 'UserController@logout')->name('logout')->middleware('auth');

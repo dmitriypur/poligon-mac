@@ -14,6 +14,6 @@
 @endauth
 @guest()
     <div>
-        <i class="fa fa-bookmark-o" aria-hidden="true"></i>
+        <i class="far fa-bookmark"></i>
     </div>
 @endguest

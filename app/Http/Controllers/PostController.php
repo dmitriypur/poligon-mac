@@ -10,14 +10,16 @@ class PostController extends Controller
 {
     public function index(Request $request)
     {
-        $posts = Post::orderBy('id', 'DESC')->with('likes')->paginate(5);
+        $posts = Post::orderBy('id', 'DESC')->with('likes')->paginate(4);
         $title = 'Новости';
-
+        $reklama = Reklama::select('title', 'link', 'image', 'content')->get();
+        $currentPage = $posts->currentPage() - 1;
+        $count = count($reklama);
         if($request->ajax()){
-            $view = view('parts.data', compact('posts'))->render();
-            return response()->json(['html' => $view]);
+            $view = view('parts.data', compact('posts', 'reklama', 'count', 'currentPage'))->render();
+            return response()->json(['html' => $view, 'reklama' => $reklama]);
         }
-        return view('frontend.post.index', compact('posts', 'title'));
+        return view('frontend.post.index', compact('posts', 'title', 'reklama', 'count', 'currentPage'));
     }
 
     public function show($slug)
@@ -25,6 +27,11 @@ class PostController extends Controller
         $post = Post::where('slug', $slug)->firstOrFail();
         $post->view_count += 1;
         $post->update();
-        return view('frontend.post.show', compact('post'));
+
+        if($post){
+            $comments = $post->comments;
+            $com = $comments->groupBy('parent_id');
+        } else $com = false;
+        return view('frontend.post.show', compact('post', 'com'));
     }
 }

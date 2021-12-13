@@ -1,6 +1,7 @@
-{{--@if($posts->total() > 0)--}}
-    @foreach($posts as $k => $post)
 
+@if($posts->total() > 0)
+    @php($i = $currentPage)
+    @foreach($posts as $k => $post)
         <div class="card mb-5" data-post="{{ $k }}">
             <img src="{{ $post->getImage() }}"
                  class="card-img-top" alt="{{ $post->title }}">
@@ -12,5 +13,17 @@
                 <p><i class="far fa-eye"></i> <span class="badge bg-primary">{{ $post->view_count }}</span></p>
             </div>
         </div>
+
+        @if(($k + 1) % 3 == 0)
+            <a href="{{ $reklama[$i]['link'] }}" class="text-white">
+                <div class="card mb-5 p-5" data-post="{{ $k }}" style="background: url('{{ $reklama[$i]->getImage() }}') no-repeat center/cover">
+{{--                    <img src="{{ $reklama[$i]->getImage() }}" alt="">--}}
+                    <div class="card-body">
+                        <h5 class="card-title">{{ $reklama[$i]['title'] }}</h5>
+                    </div>
+                </div>
+            </a>
+            @if($i < $count ? $i++ : 0)  @endif
+        @endif
     @endforeach
-{{--@endif--}}
+@endif
