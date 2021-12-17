@@ -40,7 +40,7 @@
                     <div class="section-title">
                         <h2>Оставить комментарий</h2>
                     </div>
-                    <form id="respond" action="{{ route('comment.store', $post->id) }}" method="post"
+                    <form id="respond" action="{{ route('post.comment.store', $post->id) }}" method="post"
                           class="post-reply">
                         @csrf
                         <div class="row">

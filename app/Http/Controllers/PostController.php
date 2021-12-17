@@ -12,7 +12,7 @@ class PostController extends Controller
     {
         $posts = Post::orderBy('id', 'DESC')->with('likes')->paginate(4);
         $title = 'Новости';
-        $reklama = Reklama::select('title', 'link', 'image', 'content')->get();
+        $reklama = Reklama::select('title', 'link', 'image', 'content', 'publish')->get();
         $currentPage = $posts->currentPage() - 1;
         $count = count($reklama);
         if($request->ajax()){

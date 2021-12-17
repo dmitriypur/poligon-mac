@@ -16,14 +16,15 @@ class CategoryController extends Controller
     public function show(Request $request, $slug)
     {
         $category = Category::where('slug', $slug)->firstOrFail();
-        $posts = $category->posts()->orderBy('id', 'DESC')->with('likes')->paginate(3);
+        $posts = $category->posts()->orderBy('id', 'DESC')->with('likes')->paginate(4);
         $title = "Новости категории '{$category->title}'";
-        $reklama = $category->reklamas()->get();
-
+        $reklama = $category->reklamas()->select('title', 'link', 'image', 'content', 'publish')->get();
+        $currentPage = $posts->currentPage() - 1;
+        $count = count($reklama);
         if($request->ajax()){
             $view = view('parts.data', compact('posts', 'reklama'))->render();
             return response()->json(['html' => $view]);
         }
-        return view('frontend.category.posts', compact('posts', 'title', 'category', 'reklama'));
+        return view('frontend.category.posts', compact('posts', 'title', 'category', 'reklama', 'currentPage', 'count'));
     }
 }

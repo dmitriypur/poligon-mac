@@ -22,7 +22,7 @@ Route::get('/tag/{slug}', 'TagController@show')->name('tag.single');
 
 Route::post('/{id}/likes', 'LikeController@index')->name('post.like.store');
 Route::post('/{id}/bookmark', 'BookmarkController@index')->name('post.bookmark.store');
-Route::post('/{post}/comments', 'CommentController@store')->name('comment.store');
+Route::post('/{post}/comments', 'CommentController@store')->name('post.comment.store');
 
 
 Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => 'admin'], function(){
@@ -33,6 +33,7 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => 'admi
     Route::resource('post', 'PostController');
     Route::resource('user', 'UserController');
     Route::resource('reklama', 'ReklamaController');
+    Route::resource('comment', 'CommentController');
 
     Route::get('trash', 'TrashedPostController@index')->name('trash');
     Route::get('restore/{id}', 'TrashedPostController@restore')->name('restore.post');
